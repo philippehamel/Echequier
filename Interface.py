@@ -60,15 +60,20 @@ class CanvasEchequier(Canvas):
                     self.create_text(x, y, text=string, font=("Times", self.n_pixels_par_case//2), tags='pieces')
 
 
+class Window(Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Chess Board")
+
+        canvas = CanvasEchequier(self, 100)
+        canvas.draw_case()
+        canvas.draw_pieces()
+        canvas.grid()
+
+        button = Button(self, text="Quit", command=self.quit)
+        button.grid(row=1)
+
+
 if __name__ == '__main__':
-    root = Tk()
-
-    canvas = CanvasEchequier(root, 100)
-    canvas.draw_case()
-    canvas.draw_pieces()
-    canvas.grid()
-
-    button = Button(root, text="Quit", command=root.quit)
-    button.grid(row=1)
-
-    root.mainloop()
+    f = Window()
+    f.mainloop()
