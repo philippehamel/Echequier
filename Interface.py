@@ -1,7 +1,5 @@
 from tkinter import Canvas, Tk, Button
 
-# Question 1
-
 
 class CanvasEchequier(Canvas):
     def __init__(self, root, n_pixels_par_case):
@@ -12,9 +10,6 @@ class CanvasEchequier(Canvas):
         self.height = self.n_col * self.n_pixels_par_case
 
         super().__init__(self.root, height=self.height, width=self.width)
-
-        self.row_name = ['1', '2', '3', '4', '5', '6', '7', '8']
-        self.col_name = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'g']
 
         self.pieces = {
             'a1': 'TB', 'b1': 'CB', 'c1': 'FB', 'd1': 'DB', 'e1': 'RB', 'f1': 'FB', 'g1': 'CB', 'h1': 'TB',
@@ -38,8 +33,22 @@ class CanvasEchequier(Canvas):
 
                 self.create_rectangle(x0, x1, y0, y1, fill=couleur)
 
-    def draw_square(self):
-        self.create_rectangle(0, 0, 50, 50, fill="grey")
+    def draw_pieces(self):
+        caracteres_pieces = {'PB': '\u2659',
+                             'PN': '\u265f',
+                             'TB': '\u2656',
+                             'TN': '\u265c',
+                             'CB': '\u2658',
+                             'CN': '\u265e',
+                             'FB': '\u2657',
+                             'FN': '\u265d',
+                             'RB': '\u2654',
+                             'RN': '\u265a',
+                             'DB': '\u2655',
+                             'DN': '\u265b'
+                             }
+        for position, pieces in self.pieces.items():
+            pass
 
 
 if __name__ == '__main__':
@@ -51,6 +60,5 @@ if __name__ == '__main__':
 
     button = Button(root, text="Quit", command=root.quit)
     button.grid(row=1)
-
 
     root.mainloop()
