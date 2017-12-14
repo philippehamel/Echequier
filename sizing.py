@@ -43,3 +43,6 @@ for position, pieces in pieces.items():
     for i, code in caracteres_pieces.items():
         if i == pieces:
             print("Position: {} ; Code: {} ; Pieces: {}".format(position, pieces, code))
+
+liste = ["allo", "patate", 'ok']
+print(liste.index('patate'))

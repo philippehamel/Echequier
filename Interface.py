@@ -11,6 +11,9 @@ class CanvasEchequier(Canvas):
 
         super().__init__(self.root, height=self.height, width=self.width)
 
+        self.col_name = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+        self.row_name = ['1', '2', '3', '4', '5', '6', '7', '8']
+
         self.pieces = {
             'a1': 'TB', 'b1': 'CB', 'c1': 'FB', 'd1': 'DB', 'e1': 'RB', 'f1': 'FB', 'g1': 'CB', 'h1': 'TB',
             'a2': 'PB', 'b2': 'PB', 'c2': 'PB', 'd2': 'PB', 'e2': 'PB', 'f2': 'PB', 'g2': 'PB', 'h2': 'PB',
@@ -47,8 +50,14 @@ class CanvasEchequier(Canvas):
                              'DB': '\u2655',
                              'DN': '\u265b'
                              }
-        for position, pieces in self.pieces.items():
-            pass
+        for position, code in self.pieces.items():
+            for pieces, string in caracteres_pieces.items():
+                if pieces == code:
+                    col = self.col_name.index(position[0])
+                    row = self.row_name.index(position[1])
+                    x = col * self.n_pixels_par_case + (self.n_pixels_par_case/2)
+                    y = row * self.n_pixels_par_case + (self.n_pixels_par_case/2)
+                    self.create_text(x, y, text=string, font=("Times", self.n_pixels_par_case//2), tags='pieces')
 
 
 if __name__ == '__main__':
@@ -56,6 +65,7 @@ if __name__ == '__main__':
 
     canvas = CanvasEchequier(root, 100)
     canvas.draw_case()
+    canvas.draw_pieces()
     canvas.grid()
 
     button = Button(root, text="Quit", command=root.quit)
