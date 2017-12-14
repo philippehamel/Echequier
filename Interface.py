@@ -13,8 +13,6 @@ class CanvasEchequier(Canvas):
 
         super().__init__(self.root, height=self.height, width=self.width)
 
-        self.create_rectangle(50, 50, self.width-50, self.height-50, fill="green")
-
         self.row_name = ['1', '2', '3', '4', '5', '6', '7', '8']
         self.col_name = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'g']
 
@@ -26,19 +24,33 @@ class CanvasEchequier(Canvas):
         }
 
     def draw_case(self):
-        for i in self.n_row:
-            for j in self.n_col:
-                pass
-            pass
+        for i in range(self.n_row):
+            for j in range(self.n_col):
+                x0 = j * self.n_pixels_par_case
+                x1 = i * self.n_pixels_par_case
+                y0 = j * self.n_pixels_par_case + self.n_pixels_par_case
+                y1 = i * self.n_pixels_par_case + self.n_pixels_par_case
+
+                if (i + j) % 2 == 0:
+                    couleur = "white"
+                else:
+                    couleur = "grey"
+
+                self.create_rectangle(x0, x1, y0, y1, fill=couleur)
+
+    def draw_square(self):
+        self.create_rectangle(0, 0, 50, 50, fill="grey")
 
 
 if __name__ == '__main__':
     root = Tk()
 
     canvas = CanvasEchequier(root, 100)
+    canvas.draw_case()
     canvas.grid()
 
     button = Button(root, text="Quit", command=root.quit)
     button.grid(row=1)
+
 
     root.mainloop()
