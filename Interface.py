@@ -6,8 +6,10 @@ from tkinter import Canvas, Tk, Button
 class CanvasEchequier(Canvas):
     def __init__(self, root, n_pixels_par_case):
         self.root = root
-        self.width = n_pixels_par_case
-        self.height = n_pixels_par_case
+        self.n_pixels_par_case = n_pixels_par_case
+        self.n_row, self.n_col = 8, 8
+        self.width = self.n_row * self.n_pixels_par_case
+        self.height = self.n_col * self.n_pixels_par_case
 
         super().__init__(self.root, height=self.height, width=self.width)
 
@@ -17,8 +19,8 @@ class CanvasEchequier(Canvas):
 if __name__ == '__main__':
     root = Tk()
 
-    canvas = CanvasEchequier(root, 600)
-    canvas.grid()
+    canvas = CanvasEchequier(root, 100)
+    canvas.grid()   
 
     button = Button(root, text="Quit", command=root.quit)
     button.grid(row=1)
